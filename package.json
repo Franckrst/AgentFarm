@@ -12,7 +12,9 @@
     "workflows/",
     "prompts/",
     "agents/",
-    "templates/"
+    "templates/",
+    ".claude/",
+    ".crush/"
   ],
   "scripts": {
     "build": "tsc",
