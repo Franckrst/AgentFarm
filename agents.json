@@ -1,0 +1,24 @@
+{
+  "agents": [
+    {
+      "name": "expert-frontend",
+      "description": "React, Vue, CSS, Tailwind, UI components, browser APIs",
+      "file": "agents/expert-frontend.md"
+    },
+    {
+      "name": "expert-backend",
+      "description": "Node.js, Python, APIs, auth, business logic, server-side",
+      "file": "agents/expert-backend.md"
+    },
+    {
+      "name": "expert-database",
+      "description": "SQL, migrations, schema design, query optimization, ORMs",
+      "file": "agents/expert-database.md"
+    },
+    {
+      "name": "expert-fullstack",
+      "description": "Full-stack development, integration between frontend and backend",
+      "file": "agents/expert-fullstack.md"
+    }
+  ]
+}

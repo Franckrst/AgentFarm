@@ -1,0 +1,11 @@
+{
+  "name": "feature-dev",
+  "steps": [
+    {"id": "plan",    "type": "ai",     "role": "planner"},
+    {"id": "develop", "type": "ai",     "role": "developer", "loop": true},
+    {"id": "verify",  "type": "ai",     "role": "verifier"},
+    {"id": "test",    "type": "ai",     "role": "tester"},
+    {"id": "review",  "type": "ai",     "role": "reviewer"},
+    {"id": "merge",   "type": "ai",     "role": "merger"}
+  ]
+}

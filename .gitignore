@@ -1,0 +1,14 @@
+ui/node_modules/
+.dashboard.pid
+dashboard.log
+.DS_Store
+ui/dist/
+runs/*
+!runs/.gitkeep
+logo-drafts/
+.idea
+config.json
+docs/plans/
+.worktrees
+dist/
+node_modules/

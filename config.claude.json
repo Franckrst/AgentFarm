@@ -1,0 +1,7 @@
+{
+  "spawn_command": "claude --dangerously-skip-permissions  -p \"$AGENTFARM_PROMPT\" --model \"$AGENTFARM_MODEL\"",
+  "notify_command": "",
+  "default_model": "opus",
+  "stuck_timeout_hours": 3,
+  "session_check_command": ""
+}

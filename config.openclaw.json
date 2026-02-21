@@ -1,0 +1,7 @@
+{
+  "spawn_command": "openclaw agent --local --session-id \"$AGENTFARM_LABEL\" --timeout 600 -m \"$AGENTFARM_PROMPT\"",
+  "notify_command": "openclaw send --session main --message '{message}'",
+  "default_model": "anthropic/claude-sonnet-4-20250514",
+  "stuck_timeout_hours": 3,
+  "session_check_command": "openclaw sessions list --json 2>/dev/null | jq -r '.[].label // empty' | grep -q '{label}'"
+}

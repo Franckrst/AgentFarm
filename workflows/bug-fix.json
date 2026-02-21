@@ -1,0 +1,11 @@
+{
+  "name": "bug-fix",
+  "steps": [
+    {"id": "triage",  "type": "ai",     "role": "planner"},
+    {"id": "fix",     "type": "ai",     "role": "developer"},
+    {"id": "verify",  "type": "ai",     "role": "verifier"},
+    {"id": "test",    "type": "ai",     "role": "tester"},
+    {"id": "review",  "type": "ai",     "role": "reviewer"},
+    {"id": "merge",   "type": "ai",     "role": "merger"}
+  ]
+}
