@@ -18,8 +18,8 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org
 
-      - run: npm install --package-lock-only
-      - run: npm ci
+      - run: rm -rf node_modules package-lock.json
+      - run: npm install
 
       - run: npm run build
 
