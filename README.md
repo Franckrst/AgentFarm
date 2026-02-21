@@ -5,7 +5,9 @@
 <img src="screen.jpg" width="1024" alt="Agentfarm screenshot" />
 </p>
 
-**AI workflow orchestrator for OpenClaw, Claude CLI, OpenCode, Crush...**
+**AI workflow orchestrator for Claude Code, OpenClaw, OpenCode, Crush...**
+
+Agentfarm breaks down a development task into specialized steps — planning, coding, verifying, testing, reviewing, merging — and runs each one as an autonomous AI agent. You describe what you want, it handles the rest in an isolated git worktree, then merges the result back.
 
 ```
 agentfarm run "Add dark mode" --repo ./my-app
@@ -38,7 +40,7 @@ The `init` command will:
 
 ## Configure
 
-Edit `config.json`:
+`agentfarm init` generates `~/.agentfarm/config.json` for you. To customize it, edit the file:
 
 ```json
 {
@@ -79,6 +81,32 @@ agentfarm status                                        # latest run
 agentfarm list                                          # all runs
 agentfarm cancel <run-id>                               # abort
 agentfarm logs <run-id>                                 # step outputs
+```
+
+### How it works
+
+1. **Setup** — creates a git worktree and feature branch so the original repo stays untouched
+2. **Planner** — analyzes the task, breaks it into user stories in `plan.json`, assigns a specialist agent per story
+3. **Developer** — loops through each story sequentially, using the assigned specialist profile (frontend, backend, database...)
+4. **Verifier** — checks the implementation against the plan
+5. **Tester** — writes and runs tests
+6. **Reviewer** — performs a final code review
+7. **Merger** — merges the feature branch back into main and cleans up the worktree
+
+Example output of `agentfarm status`:
+
+```
+Run: af-1740100000-dark-mode
+Task: Add dark mode
+Status: running (step 3/7)
+
+  ✅ setup       done    0m12s
+  ✅ planner     done    2m34s   → 4 stories
+  🔄 developer   running 5m01s   → US-002/US-004 (expert-frontend)
+  ⬚  verifier    pending
+  ⬚  tester      pending
+  ⬚  reviewer    pending
+  ⬚  merger      pending
 ```
 
 ## Setup by Provider
@@ -148,8 +176,8 @@ JSON files in `workflows/`. Each defines a pipeline:
 }
 ```
 
-- **`type: script`** — runs a script (setup is handled automatically by `agentfarm run`)
-- **`type: ai`** — spawns an agent with `prompts/<role>.md`
+- **`type: script`** — runs a shell script directly (the initial setup step is handled automatically by `agentfarm run` before the workflow starts, so you don't need to include it in the JSON)
+- **`type: ai`** — spawns an AI agent with the prompt template at `prompts/<role>.md`
 - **`model`** — per-step override (falls back to `default_model`)
 - **`loop: true`** — iterates over stories from `plan.json` (sequential)
 
@@ -211,11 +239,11 @@ Schedule it hourly via cron, systemd timer, or OpenClaw cron.
 ## Dashboard
 
 ```bash
-agentfarm dashboard   # start
+agentfarm dashboard   # start on http://localhost:4455
 agentfarm stop        # stop
 ```
 
-Kanban board with real-time polling, step progress badges, dark mode.
+Web UI with a Kanban board showing all runs and their step progress in real time. Includes a log viewer per step, status badges, and dark mode support.
 
 ## Project Structure
 
