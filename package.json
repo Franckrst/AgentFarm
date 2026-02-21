@@ -41,5 +41,9 @@
     "node": ">=18"
   },
   "keywords": ["ai", "workflow", "automation", "claude", "agents"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Franckrst/AgentFarm"
+  },
   "license": "MIT"
 }
