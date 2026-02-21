@@ -13,6 +13,7 @@
     "prompts/",
     "agents/",
     "templates/",
+    "ui/",
     ".claude/",
     ".crush/"
   ],
