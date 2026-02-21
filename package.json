@@ -1,5 +1,5 @@
 {
-  "name": "agentfarm",
+  "name": "@franckrst/agentfarm",
   "version": "1.0.0",
   "description": "Lightweight AI workflow orchestrator for software development",
   "type": "module",
