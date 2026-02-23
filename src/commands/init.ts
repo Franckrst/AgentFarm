@@ -108,7 +108,7 @@ function getDefaultSpawnCommand(provider: ProviderType): string {
     case 'claude':
       return 'claude --dangerously-skip-permissions -p "$AGENTFARM_PROMPT" --model "$AGENTFARM_MODEL"';
     case 'openclaw':
-      return 'openclaw --prompt-file "$AGENTFARM_TASK_FILE" --model "$AGENTFARM_MODEL"';
+      return 'openclaw agent --local --session-id "$AGENTFARM_LABEL" --timeout 600 -m "$AGENTFARM_PROMPT"';
     case 'opencode':
       return 'opencode --prompt "$AGENTFARM_PROMPT" --model "$AGENTFARM_MODEL"';
     default:
@@ -138,7 +138,7 @@ function getSourceSkillsDir(provider: ProviderType): string {
     case 'opencode':
       return join(agentfarmDir, '.crush', 'skills');
     case 'openclaw':
-      return join(agentfarmDir, '.claude', 'skills'); // OpenClaw uses same format as Claude
+      return join(agentfarmDir, '.claude', 'skills'); // TODO: create .openclaw skills dir
     default:
       return join(agentfarmDir, '.claude', 'skills');
   }
