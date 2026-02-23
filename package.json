@@ -23,6 +23,8 @@
     "start": "node dist/cli.js",
     "test": "vitest",
     "test:run": "vitest run",
+    "test:e2e": "./scripts/test-e2e.sh",
+    "test:e2e:quick": "./scripts/test-e2e.sh --timeout 3",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
