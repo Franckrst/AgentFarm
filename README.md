@@ -23,11 +23,7 @@ agentfarm run "Add dark mode" --repo ./my-app
 ## Install
 
 ```bash
-git clone https://github.com/Franckrst/Agentfarm.git
-cd Agentfarm
-npm install
-npm run build
-npm link  # makes 'agentfarm' available globally
+npm i @franckrst/agentfarm -g
 agentfarm init  # configure provider and install skills
 ```
 
