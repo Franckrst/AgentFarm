@@ -3,5 +3,6 @@
   "notify_command": "",
   "default_model": "opus",
   "stuck_timeout_hours": 3,
-  "session_check_command": ""
+  "session_check_command": "",
+  "step_timeout_minutes": 120
 }

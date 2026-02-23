@@ -21,6 +21,7 @@ yargs(hideBin(process.argv))
   .command(commands.cancel)
   .command(commands.dashboard)
   .command(commands.stop)
+  .command(commands.cleanupCommand) // Fix 2: cleanup command
   .demandCommand(1, 'You must specify a command')
   .help()
   .alias('h', 'help')

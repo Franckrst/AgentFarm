@@ -67,6 +67,7 @@ See **Setup by Provider** below for provider-specific configs.
 | `default_model` | Fallback model for steps without explicit `model` |
 | `stuck_timeout_hours` | When to consider a step stuck (default: 2) |
 | `session_check_command` | Check if agent is still alive (`{label}` placeholder) — medic skips active sessions |
+| `step_timeout_minutes` | Timeout brutal per step in minutes (default: none) |
 
 ## Usage
 
@@ -77,6 +78,8 @@ agentfarm status                                        # latest run
 agentfarm list                                          # all runs
 agentfarm cancel <run-id>                               # abort
 agentfarm logs <run-id>                                 # step outputs
+agentfarm cleanup --dry-run                            # check what can be cleaned
+agentfarm cleanup --days 3                            # clean failed runs older than 3 days
 ```
 
 ### How it works

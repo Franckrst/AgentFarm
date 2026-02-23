@@ -70,6 +70,7 @@ export async function unstickRun(runId: string, stepId: string): Promise<void> {
     model: config.default_model,
     runId,
     agentfarmDir,
+    timeoutMinutes: config.step_timeout_minutes, // Fix 1: timeout pour medic aussi
   });
 
   if (result.exitCode !== 0) {
