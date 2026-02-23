@@ -10,7 +10,7 @@ import {
   loadConfig,
 } from '../utils/index.js';
 import { spawnAgent } from '../utils/spawn.js';
-import { advance as log } from '../utils/log.js';
+import { advance as log, setLogContext } from '../utils/log.js';
 import { AgentSpawnError } from '../utils/errors.js';
 import { getRunDir, findStepFile, nowTimestamp } from './run.js';
 import type { Run, Step, Plan, Workflow, StepDefinition, Config } from '../types/index.js';
@@ -40,6 +40,9 @@ export async function advanceRun(runId: string): Promise<void> {
 
   const ctx: StepContext = { runId, runDir, run, config, workdir, agentfarmDir };
 
+  // Fix 3: Initialiser le contexte de logs centralisé
+  setLogContext(runDir);
+  
   log(`run ${runId} (workflow=${run.workflow})`);
 
   for (const stepDef of workflow.steps) {
@@ -169,6 +172,7 @@ async function executeSingleAiStep(
     model,
     runId: ctx.runId,
     agentfarmDir: ctx.agentfarmDir,
+    timeoutMinutes: ctx.config.step_timeout_minutes, // Fix 1: timeout par step
   });
 
   if (result.exitCode !== 0) {
@@ -240,6 +244,7 @@ async function executeLoopStep(
       model,
       runId: ctx.runId,
       agentfarmDir: ctx.agentfarmDir,
+      timeoutMinutes: ctx.config.step_timeout_minutes, // Fix 1: timeout par step
     });
 
     // Check if cancelled

@@ -13,6 +13,7 @@ export interface SpawnOptions {
   model: string;
   runId: string;
   agentfarmDir: string;
+  timeoutMinutes?: number; // Fix 1: timeout optionnel par step
 }
 
 export interface SpawnResult {
@@ -30,6 +31,7 @@ export async function spawnAgent(options: SpawnOptions): Promise<SpawnResult> {
     model,
     runId,
     agentfarmDir,
+    timeoutMinutes,
   } = options;
 
   const logsDir = join(runDir, 'logs');
@@ -67,19 +69,34 @@ export async function spawnAgent(options: SpawnOptions): Promise<SpawnResult> {
   try {
     // Parse and execute spawn command
     // The command uses shell syntax with variable substitution
-    const result = await execa('sh', ['-c', command], {
+    const execOptions: any = {
       cwd: workdir,
       env,
       stdin: 'ignore',
       stdout: logStream,
       stderr: logStream,
       reject: false,
-    });
+    };
+
+    // Fix 1: Ajouter timeout brutal si spécifié
+    if (timeoutMinutes && timeoutMinutes > 0) {
+      execOptions.timeout = timeoutMinutes * 60 * 1000; // Convert to milliseconds
+      advance(`agent timeout set to ${timeoutMinutes} minutes`);
+    }
+
+    const result = await execa('sh', ['-c', command], execOptions);
 
     logStream.close();
     return { exitCode: result.exitCode ?? 1, logFile };
-  } catch (error) {
+  } catch (error: any) {
     logStream.close();
+    
+    // Check if error is from timeout
+    if (error.timedOut) {
+      advance(`agent TIMEOUT after ${timeoutMinutes} minutes`);
+      return { exitCode: 124, logFile }; // 124 = timeout exit code
+    }
+    
     advance(`agent FAILED: ${error}`);
     return { exitCode: 1, logFile };
   }
