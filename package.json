@@ -1,6 +1,6 @@
 {
   "name": "@franckrst/agentfarm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight AI workflow orchestrator for software development",
   "type": "module",
   "bin": {
@@ -45,7 +45,13 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["ai", "workflow", "automation", "claude", "agents"],
+  "keywords": [
+    "ai",
+    "workflow",
+    "automation",
+    "claude",
+    "agents"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Franckrst/AgentFarm"
