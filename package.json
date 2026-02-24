@@ -1,6 +1,6 @@
 {
   "name": "@franckrst/agentfarm",
-  "version": "1.0.2",
+  "version": "0.0.6",
   "description": "Lightweight AI workflow orchestrator for software development",
   "type": "module",
   "bin": {

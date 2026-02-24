@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.2] - 2026-02-24
+## [0.0.6] - 2026-02-24
 
 ### Fixed
 - **OpenClaw Integration**: Fixed compatibility issues with OpenClaw agents
