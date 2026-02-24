@@ -20,7 +20,14 @@ jobs:
 
       - run: npm ci
 
-      - run: npm version "$GITHUB_REF_NAME" --no-git-tag-version
+      - name: Update package version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          if [ "$CURRENT_VERSION" != "$GITHUB_REF_NAME" ]; then
+            npm version "$GITHUB_REF_NAME" --no-git-tag-version
+          else
+            echo "Version already matches tag: $GITHUB_REF_NAME"
+          fi
 
       - run: npm run build
 
