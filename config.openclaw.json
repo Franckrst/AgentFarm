@@ -1,7 +1,8 @@
 {
-  "spawn_command": "openclaw agent --local --session-id \"$AGENTFARM_LABEL\" --timeout 600 -m \"$AGENTFARM_PROMPT\"",
-  "notify_command": "openclaw send --session main --message '{message}'",
+  "spawn_command": "openclaw agent --local --session-id \"$AGENTFARM_LABEL\" --timeout 300 -m \"$AGENTFARM_PROMPT\"",
+  "notify_command": "openclaw message send --channel telegram --target YOUR_TELEGRAM_ID --message '{message}'",
   "default_model": "anthropic/claude-sonnet-4-20250514",
   "stuck_timeout_hours": 3,
+  "step_timeout_minutes": 5,
   "session_check_command": "openclaw sessions list --json 2>/dev/null | jq -r '.[].label // empty' | grep -q '{label}'"
 }

@@ -84,6 +84,12 @@ export async function spawnAgent(options: SpawnOptions): Promise<SpawnResult> {
       advance(`agent timeout set to ${timeoutMinutes} minutes`);
     }
 
+    // DEBUG: Log exact command and environment
+    advance(`DEBUG: About to execute command: ${command}`);
+    advance(`DEBUG: Working directory: ${workdir}`);
+    advance(`DEBUG: AGENTFARM_PROMPT length: ${env.AGENTFARM_PROMPT?.length || 0}`);
+    advance(`DEBUG: AGENTFARM_LABEL: ${env.AGENTFARM_LABEL}`);
+
     const result = await execa('sh', ['-c', command], execOptions);
 
     logStream.close();
